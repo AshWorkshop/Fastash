@@ -109,3 +109,4 @@ venv.bak/
 project/media/
 project/main/static/images/
 db.sqlite3
+.DS_Store
