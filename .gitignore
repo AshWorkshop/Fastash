@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+#local
+
+*_key.py
+project/media/
+project/main/static/images/
+db.sqlite3
