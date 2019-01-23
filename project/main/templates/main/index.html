@@ -1,15 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>IMG</title>
-    {% load staticfiles %}
-    <link rel="shortcut icon" href="{%static "images/paperForMobile.png"  %}" />
-  </head>
-  <body style="background: #000; margin:0px; padding:0px;">
-	  <a href="static/images/paperForMobile.png"><img style="width: 100%" src="static/images/paperForMobile.png"></img></a>
-  </body>
-</html>
-
 
 <script language="javascript">
 function is_mobile() {
@@ -26,7 +15,22 @@ function is_mobile() {
    return true
   }
  }
- if (is_mobile()) {
-  document.location.href= 'http://caibaojian.com';  //修改http://caibaojian.com为你所需跳转目标页地址
+
+ function MobileOrPc() {
+   if (is_mobile()) {
+    document.getElementById('demo').src="static/images/paperForMobile.png";
+   }
  }
+
 </script>
+
+<html lang="en">
+  <head>
+    <title>Raising At Ease</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" href="{%static "images/paperForMobile.png"  %}" />
+  </head>
+  <body style="background: #000; margin:0px; padding:0px;" onload="MobileOrPc()">
+	  <a href="static/RAE.pdf"><img id="demo" style="width: 100%" src="static/images/paperForPc.png"></img></a>
+  </body>
+</html>
