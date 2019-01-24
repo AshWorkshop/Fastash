@@ -24,13 +24,44 @@ function is_mobile() {
 
 </script>
 
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	img{
+		width: 100%;
+		display: block;
+	}
+	div{
+		position: relative;
+	}
+	span{
+		position: absolute;
+		top: 15%;
+		left: 45%;
+		width: 12rem;
+		margin-left: -1.5rem;
+		color: #fff;
+		text-align: center;
+		font-size: 0.8rem;
+		line-height: 1rem;
+		border: 1px solid #fff;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+</style>
+
 <html lang="en">
   <head>
     <title>Raising At Ease</title>
     {% load staticfiles %}
-    <link rel="shortcut icon" href="{%static "images/paperForMobile.png"  %}" />
+    <link rel="shortcut icon" href="{%static "paperForMobile.png"  %}" />
   </head>
-  <body style="background: #000; margin:0px; padding:0px;" onload="MobileOrPc()">
-	  <a href="static/RAE.pdf"><img id="demo" style="width: 100%" src="static/images/paperForPc.png"></img></a>
+  <body style="font-size" onload="MobileOrPc()">
+    <div>
+	  <img id="demo" style="width: 100%" src="static/paperForPc.png" alt>
+    <span onclick="location.href='static/RAE.pdf'">white paper project</span>
+    </div>
   </body>
 </html>
