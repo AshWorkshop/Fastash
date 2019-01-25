@@ -1,29 +1,81 @@
 <!DOCTYPE html>
 
-<script language="javascript">
-function is_mobile() {
-    var regex_match = /(nokia|iphone|android|motorola|^mot-|softbank|foma|docomo|kddi|up.browser|up.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte-|longcos|pantech|gionee|^sie-|portalmmm|jigs browser|hiptop|^benq|haier|^lct|operas*mobi|opera*mini|320x320|240x320|176x220)/i;
-  var u = navigator.userAgent;
-  if (null == u) {
-   return true;
-  }
-  var result = regex_match.exec(u);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cultural chain</title>
+	<script>
+  function is_mobile() {
+      var regex_match = /(nokia|iphone|android|motorola|^mot-|softbank|foma|docomo|kddi|up.browser|up.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte-|longcos|pantech|gionee|^sie-|portalmmm|jigs browser|hiptop|^benq|haier|^lct|operas*mobi|opera*mini|320x320|240x320|176x220)/i;
+    var u = navigator.userAgent;
+    if (null == u) {
+     return true;
+    }
+    var result = regex_match.exec(u);
 
-  if (null == result) {
-   return false
-  } else {
-   return true
-  }
- }
-
- function MobileOrPc() {
-   if (is_mobile()) {
-    document.getElementById('demo').src="static/images/paperForMobile.png";
+    if (null == result) {
+     return false
+    } else {
+     return true
+    }
    }
- }
 
-</script>
+   function MobileOrPc() {
+     if (is_mobile()) {
+      document.getElementById('demo').src="static/paperForMobile.png";
+     }
+   }
 
+		(function(designWidth, maxWidth) {
+			var doc = document,
+			win = window,
+			docEl = doc.documentElement,
+			remStyle = document.createElement("style"),
+			tid;
+
+			function refreshRem() {
+				var width = docEl.getBoundingClientRect().width;
+				maxWidth = maxWidth || 540;
+				width>maxWidth && (width=maxWidth);
+				var rem = width * 100 / designWidth;
+				remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
+			}
+
+			if (docEl.firstElementChild) {
+				docEl.firstElementChild.appendChild(remStyle);
+			} else {
+				var wrap = doc.createElement("div");
+				wrap.appendChild(remStyle);
+				doc.write(wrap.innerHTML);
+				wrap = null;
+			}
+			//要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+			refreshRem();
+
+			win.addEventListener("resize", function() {
+				clearTimeout(tid); //防止执行两次
+				tid = setTimeout(refreshRem, 300);
+			}, false);
+
+			win.addEventListener("pageshow", function(e) {
+				if (e.persisted) { // 浏览器后退的时候重新计算
+					clearTimeout(tid);
+					tid = setTimeout(refreshRem, 300);
+				}
+			}, false);
+
+			if (doc.readyState === "complete") {
+				doc.body.style.fontSize = "16px";
+			} else {
+				doc.addEventListener("DOMContentLoaded", function(e) {
+					doc.body.style.fontSize = "16px";
+				}, false);
+			}
+		})(750, 750);
+	</script>
+    <link href="static/logo.jpg" rel="shortcut icon" type="image/x-icon" />
+</head>
 <style>
 	*{
 		margin: 0;
@@ -38,30 +90,24 @@ function is_mobile() {
 	}
 	span{
 		position: absolute;
-		top: 15%;
-		left: 45%;
-		width: 12rem;
+		top: 14%;
+		left: 50%;
+		width: 3rem;
 		margin-left: -1.5rem;
 		color: #fff;
 		text-align: center;
-		font-size: 0.8rem;
-		line-height: 1rem;
+		font-size: 0.2rem;
+		line-height: 0.4rem;
 		border: 1px solid #fff;
 		border-radius: 10px;
 		cursor: pointer;
 	}
 </style>
-
-<html lang="en">
-  <head>
-    <title>Raising At Ease</title>
-    {% load staticfiles %}
-    <link rel="shortcut icon" href="{%static "paperForMobile.png"  %}" />
-  </head>
-  <body style="font-size" onload="MobileOrPc()">
-    <div>
-	  <img id="demo" style="width: 100%" src="static/paperForPc.png" alt>
-    <span onclick="location.href='static/RAE.pdf'">white paper project</span>
-    </div>
-  </body>
+<body onload="MobileOrPc()">
+	<div>
+		<img id="demo" src="static/images/paperForPc.png" alt="">
+		<span onclick="location.href='static/RAE.pdf'">white paper project</span>
+	</div>
+	<script src="jquery-2.2.1.min.js"></script>
+</body>
 </html>
